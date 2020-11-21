@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Nov 21 18:26:13 2020
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : servo_top
+Top-level Entity Name : top
+Family : Cyclone IV E
+Device : EP4CE6E22C8
+Timing Models : Final
+Total logic elements : 123 / 6,272 ( 2 % )
+    Total combinational functions : 120 / 6,272 ( 2 % )
+    Dedicated logic registers : 66 / 6,272 ( 1 % )
+Total registers : 66
+Total pins : 3 / 92 ( 3 % )
+Total virtual pins : 0
+Total memory bits : 2,048 / 276,480 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 30 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )
