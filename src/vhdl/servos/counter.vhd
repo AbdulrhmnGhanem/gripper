@@ -1,42 +1,42 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-use ieee.math_real.all;
+USE ieee.math_real.ALL;
 
-entity counter is
-  generic (
-    counter_bits : integer
+ENTITY counter IS
+  GENERIC (
+    counter_bits : INTEGER
   );
-  port (
-    clk : in std_logic;
-    rst : in std_logic;
-    count_enable : std_logic;
-    counter : out unsigned(counter_bits - 1 downto 0)
+  PORT (
+    clk : IN STD_LOGIC;
+    rst : IN STD_LOGIC;
+    count_enable : STD_LOGIC;
+    counter : OUT unsigned(counter_bits - 1 DOWNTO 0)
   );
-end counter; 
+END counter;
 
-architecture rtl of counter is
+ARCHITECTURE rtl OF counter IS
 
-  signal counter_i : unsigned(counter'range);
-  
-begin
+  SIGNAL counter_i : unsigned(counter'RANGE);
+
+BEGIN
 
   counter <= counter_i;
-  
-  COUNTER_PROC : process(clk)
-  begin
-    if rising_edge(clk) then
-      if rst = '1' then
-        counter_i <= (others => '0');
-        
-      else
-        if count_enable = '1' then
-          counter_i <= counter_i + 1;
-        end if;
-        
-      end if;
-    end if;
-  end process;
 
-end architecture;
+  COUNTER_PROC : PROCESS (clk)
+  BEGIN
+    IF rising_edge(clk) THEN
+      IF rst = '1' THEN
+        counter_i <= (OTHERS => '0');
+
+      ELSE
+        IF count_enable = '1' THEN
+          counter_i <= counter_i + 1;
+        END IF;
+
+      END IF;
+    END IF;
+  END PROCESS;
+
+END ARCHITECTURE;

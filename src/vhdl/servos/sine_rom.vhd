@@ -1,53 +1,53 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-use ieee.math_real.all;
+USE ieee.math_real.ALL;
 
-entity sine_rom is
-  generic (
-    addr_bits : integer range 1 to 30;
-    data_bits : integer range 1 to 31
+ENTITY sine_rom IS
+  GENERIC (
+    addr_bits : INTEGER RANGE 1 TO 30;
+    data_bits : INTEGER RANGE 1 TO 31
   );
-  port (
-    clk : in std_logic;
-    addr : in unsigned(addr_bits - 1 downto 0);
-    data : out unsigned(data_bits - 1 downto 0)
+  PORT (
+    clk : IN STD_LOGIC;
+    addr : IN unsigned(addr_bits - 1 DOWNTO 0);
+    data : OUT unsigned(data_bits - 1 DOWNTO 0)
   );
-end sine_rom; 
+END sine_rom;
 
-architecture rtl of sine_rom is
-  
-  subtype addr_range is integer range 0 to 2**addr_bits - 1;
-  type rom_type is array (addr_range) of unsigned(data_bits - 1 downto 0);
+ARCHITECTURE rtl OF sine_rom IS
+
+  SUBTYPE addr_range IS INTEGER RANGE 0 TO 2 ** addr_bits - 1;
+  TYPE rom_type IS ARRAY (addr_range) OF unsigned(data_bits - 1 DOWNTO 0);
 
   -- Fill the ROM with sine values
-  function init_rom return rom_type is
-    variable rom_v : rom_type;
-    variable angle : real;
-    variable sin_scaled : real;
-  begin
+  FUNCTION init_rom RETURN rom_type IS
+    VARIABLE rom_v : rom_type;
+    VARIABLE angle : real;
+    VARIABLE sin_scaled : real;
+  BEGIN
 
-    for i in addr_range loop
+    FOR i IN addr_range LOOP
 
-      angle := real(i) * ((2.0 * MATH_PI) / 2.0**addr_bits);
-      sin_scaled := (1.0 + sin(angle)) * (2.0**data_bits - 1.0) / 2.0;
-      rom_v(i) := to_unsigned(integer(round(sin_scaled)), data_bits);
-      
-    end loop;
-    
-    return rom_v;
-  end init_rom;
+      angle := real(i) * ((2.0 * MATH_PI) / 2.0 ** addr_bits);
+      sin_scaled := (1.0 + sin(angle)) * (2.0 ** data_bits - 1.0) / 2.0;
+      rom_v(i) := to_unsigned(INTEGER(round(sin_scaled)), data_bits);
 
-  constant rom : rom_type := init_rom;
+    END LOOP;
 
-begin
+    RETURN rom_v;
+  END init_rom;
 
-  ROM_PROC : process(clk)
-  begin
-    if rising_edge(clk) then
+  CONSTANT rom : rom_type := init_rom;
+
+BEGIN
+
+  ROM_PROC : PROCESS (clk)
+  BEGIN
+    IF rising_edge(clk) THEN
       data <= rom(to_integer(addr));
-    end if;
-  end process;
+    END IF;
+  END PROCESS;
 
-end architecture;
+END ARCHITECTURE;
