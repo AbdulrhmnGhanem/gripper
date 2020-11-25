@@ -1,38 +1,38 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity reset is
-  port (
-    clk : in std_logic;
-    rst_n : in std_logic; -- Pullup
-    rst : out std_logic
+ENTITY reset IS
+  PORT (
+    clk : IN STD_LOGIC;
+    rst_n : IN STD_LOGIC; -- Pullup
+    rst : OUT STD_LOGIC
   );
-end reset; 
+END reset;
 
-architecture rtl of reset is
+ARCHITECTURE rtl OF reset IS
 
-  signal sreg : std_logic_vector(3 downto 0);
+  SIGNAL sreg : STD_LOGIC_VECTOR(3 DOWNTO 0);
 
-begin
+BEGIN
 
-  SREG_PROC : process(clk)
-  begin
-    if rising_edge(clk) then
-      sreg <= sreg(sreg'high - 1 downto 0) & rst_n;
-    end if;
-  end process;
+  SREG_PROC : PROCESS (clk)
+  BEGIN
+    IF rising_edge(clk) THEN
+      sreg <= sreg(sreg'high - 1 DOWNTO 0) & rst_n;
+    END IF;
+  END PROCESS;
 
-  RESET_PROC : process(sreg)
-    constant all_ones : std_logic_vector(sreg'range) := (others => '1');
-  begin
+  RESET_PROC : PROCESS (sreg)
+    CONSTANT all_ones : STD_LOGIC_VECTOR(sreg'RANGE) := (OTHERS => '1');
+  BEGIN
 
-    if sreg = all_ones then
+    IF sreg = all_ones THEN
       rst <= '0';
-    else
+    ELSE
       rst <= '1';
-    end if;
+    END IF;
 
-  end process;
+  END PROCESS;
 
-end architecture;
+END ARCHITECTURE;
