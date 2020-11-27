@@ -1,0 +1,11 @@
+*******************************
+* How to simulate in ModelSim *
+*******************************
+
+1. Start ModelSim
+
+2. Type in the ModelSim console:
+    do PATH_TO_EXTRACTED_FILES/run.do
+
+3. Follow the instructions in the ModelSim console
+    (type "runtb" to run the testbench)
